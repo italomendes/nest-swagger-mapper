@@ -1,0 +1,16 @@
+{
+  "name": "nest-swagger-mapper",
+  "version": "0.1.0-beta",
+  "main": "index.js",
+  "bin": {
+    "swagger-mapper": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "commander": "^12.1.0"
+  }
+}
