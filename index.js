@@ -67,6 +67,23 @@ const validateInput = (swaggerData, moduleNames, paths) => {
   }
 };
 
+// Função recursiva para coletar schemas referenciados via $ref
+const collectReferencedSchemas = (schema, components, relatedSchemas) => {
+  Object.keys(schema).forEach((key) => {
+    const value = schema[key];
+    if (key === '$ref') {
+      const refName = value.split('/').pop();
+      if (components.schemas[refName] && !relatedSchemas[refName]) {
+        relatedSchemas[refName] = components.schemas[refName];
+        // Chama recursivamente para coletar referências dentro do schema referenciado
+        collectReferencedSchemas(components.schemas[refName], components, relatedSchemas);
+      }
+    } else if (typeof value === 'object' && value !== null) {
+      collectReferencedSchemas(value, components, relatedSchemas);
+    }
+  });
+};
+
 // Função para filtrar por módulos ou por rotas
 const filterByInput = (swaggerData, moduleNames, paths) => {
   const { paths: swaggerPaths, components, openapi, info, security } = swaggerData;
@@ -89,6 +106,8 @@ const filterByInput = (swaggerData, moduleNames, paths) => {
             if (schemaRef) {
               const schemaName = schemaRef.split('/').pop();
               relatedSchemas[schemaName] = components.schemas[schemaName];
+              // Coleta schemas referenciados dentro do schema atual
+              collectReferencedSchemas(components.schemas[schemaName], components, relatedSchemas);
             }
           }
         });
@@ -98,6 +117,8 @@ const filterByInput = (swaggerData, moduleNames, paths) => {
         if (requestBodyContent && requestBodyContent.schema.$ref) {
           const schemaName = requestBodyContent.schema.$ref.split('/').pop();
           relatedSchemas[schemaName] = components.schemas[schemaName];
+          // Coleta schemas referenciados dentro do schema atual
+          collectReferencedSchemas(components.schemas[schemaName], components, relatedSchemas);
         }
       }
     });
