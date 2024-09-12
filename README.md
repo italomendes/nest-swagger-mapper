@@ -45,6 +45,12 @@ npm install
 npm install -g .
 ```
 
+## Ou instale via npm 
+
+```bash
+npm i nest-swagger-mapper
+```
+
 Agora a ferramenta estará disponível em seu sistema como `swagger-mapper`.
 
 ## Uso
