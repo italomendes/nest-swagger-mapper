@@ -1,11 +1,11 @@
 {
   "name": "nest-swagger-mapper",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "main": "index.js",
   "bin": {
     "swagger-mapper": "./index.js"
   },
-  "keywords": [],
+  "keywords": ["nestjs", "swagger", "openapi"],
   "author": "Italo Mendes",
   "license": "MIT",
   "description": "CLI para mapear o Swagger e retornar o JSON por rota ou módulo.",

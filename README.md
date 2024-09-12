@@ -1,7 +1,7 @@
 
 # Swagger Mapper CLI
 
-**Version**: 0.1.0-beta
+**Version**: 1.0.0
 
 ## Descrição
 
@@ -68,13 +68,19 @@ swagger-mapper --modules <nomes-dos-modulos> --url <url-do-swagger-json> [opçõ
 #### Exibir no console o mapeamento do Swagger JSON filtrado por dois módulos
 
 ```bash
-swagger-mapper --modules users,products --url http://localhost:3000/swagger-json
+swagger-mapper --modules users,products --url http://localhost:3000/swagger-json --title "Minha API" --description "Descrição personalizada da API"
+```
+
+#### Exibir no console o mapeamento do Swagger JSON filtrado por duas rotas
+
+```bash
+swagger-mapper --path /users,/products --url http://localhost:3000/swagger-json --title "Minha API" --description "Descrição personalizada da API"
 ```
 
 #### Salvar o resultado filtrado em um arquivo JSON
 
 ```bash
-swagger-mapper --modules orders,payments --url http://localhost:3000/swagger-json --output filtered-swagger.json
+swagger-mapper --modules users,products --url http://localhost:3000/swagger-json --title "Minha API" --description "Descrição personalizada da API" --output filtered-swagger.json
 ```
 
 ### Parâmetros
@@ -82,7 +88,8 @@ swagger-mapper --modules orders,payments --url http://localhost:3000/swagger-jso
 | Parâmetro  | Descrição                                                                 | Padrão                               |
 |------------|---------------------------------------------------------------------------|--------------------------------------|
 | `--url`    | A URL do Swagger JSON que será processado.                                | `http://localhost:3000/swagger-json` |
-| `--modules`| Nomes dos módulos (ou rotas) a serem filtrados, separados por vírgulas.   | **Obrigatório**                      |
+| `--modules`| Nomes dos módulos a serem filtrados, separados por vírgulas.              | **Obrigatório**                      |
+| `--path`   | Nomes das rotas a serem filtradas, separados por vírgulas.                | **Obrigatório**                      |
 | `--output` | Caminho do arquivo onde o JSON filtrado será salvo.                       | Não salva em arquivo, mostra no console |
 
 ## Estrutura do JSON Gerado
