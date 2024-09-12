@@ -1,6 +1,6 @@
 {
   "name": "nest-swagger-mapper",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "bin": {
     "swagger-mapper": "./index.js"
